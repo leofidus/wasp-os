@@ -12,7 +12,7 @@ all : bootloader reloader micropython
 # We workaround this by using BOARD_SAFE for every unconditional
 # expansion.
 ifdef BOARD
-BOARD_SAFE = $(BOARD)
+BOARD_SAFE = $(BOARD)b
 endif
 BOARD ?= $(error Please set BOARD=)
 VERSION ?= $(patsubst v%,%,$(shell git describe --tags))
@@ -64,12 +64,12 @@ micropython: build-$(BOARD_SAFE) wasp/boards/$(BOARD_SAFE)/watch.py
 	$(MAKE) -C micropython/ports/nrf \
 		BOARD=$(BOARD) SD=s132 \
 		MICROPY_VFS_LFS2=1 \
-		FROZEN_MANIFEST=$(PWD)/wasp/boards/$(BOARD)/manifest.py \
+		FROZEN_MANIFEST=$(PWD)/wasp/boards/$(BOARD)b/manifest.py \
 		USER_C_MODULES=$(PWD)/wasp/modules
 	$(PYTHON) -m nordicsemi dfu genpkg \
 		--dev-type 0x0052 \
 		--application micropython/ports/nrf/build-$(BOARD)-s132/firmware.hex \
-		build-$(BOARD)/micropython.zip
+		build-$(BOARD)b/micropython.zip
 
 build-$(BOARD_SAFE):
 	mkdir -p build-$(BOARD)
