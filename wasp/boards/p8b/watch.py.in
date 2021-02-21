@@ -33,6 +33,8 @@ from drivers.st7789 import ST7789_SPI
 from drivers.vibrator import Vibrator
 from flash.flash_spi import FLASH
 
+from drivers.lift_to_wake import LiftToWake
+
 from ubluepy import uart_connected as connected
 
 class Backlight(object):
@@ -94,6 +96,8 @@ try:
                     Pin('TP_INT', Pin.IN), Pin('TP_RST', Pin.OUT, value=0),
                     _callback)
     vibrator = Vibrator(Pin('MOTOR', Pin.OUT, value=0), active_low=True)
+
+    lift_to_wake = LiftToWake(accel, rtc)
 
     # Mount the filesystem
     boot_msg("Init SPINOR")

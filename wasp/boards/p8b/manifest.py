@@ -19,6 +19,7 @@ freeze('../..', manifest_240x240.manifest +
         'drivers/signal.py',
         'drivers/st7789.py',
         'drivers/vibrator.py',
+        'drivers/lift_to_wake.py',
         'gadgetbridge.py',
         'ppg.py',
         'shell.py',
